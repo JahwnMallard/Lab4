@@ -8,44 +8,67 @@
 #ifndef LAB4_HELPER_H_
 #define LAB4_HELPER_H_
 
-void initSPI();
 
-void LCDinit();
 
-void LCDclear();
+/*
 
-void cursorToLineTwo();
+ Funciton Name: INITSPI
+ Author: C2C John Miller, USAF
+ Function: Initializes the SPI of the MSP430
+ Inputs: none
+ Outputs: none
+ Subroutines used: none
+*/
+ void initSPI();
 
-void cursorToLineOne();
+ void LCDinit();
 
-void writeChar(char asciiChar);
+ void LCDclear();
 
-void writeString(char * string);
+ void cursorToLineTwo();
 
-void scrollString(char * string1, char * string2);
+ void cursorToLineOne();
 
-void writeDataByte(char dataByte);
+ void writeChar(char asciiChar);
 
-void writeCommandNibble(char commandNibble);
+ void writeString(char * string);
 
-void writeCommandByte(char commandByte);
+ void scrollString(char * string1, char * string2);
 
-void setSSHi();
+ void writeDataByte(char dataByte);
 
-void setSSLo();
+ void writeCommandNibble(char commandNibble);
 
-void SPI_send(char byteToSend);
+ void writeCommandByte(char commandByte);
 
-string decryptMessage(string message, char key);
+ /*
+  Function Name: SET_SS_HI
+  Author: C2C John Miller, USAF
+  Function: ; Sets slave select to high (disabled) on the LCD
+  Inputs: none
+  Outputs: none
+  Subroutines used: none
+ */
+ void set_SS_Hi();
 
-char decryptSingle(char encryptedCharacter, char key);
+/*
+  Function Name: SET_SS_LO
+  Author: C2C John Miller, USAF
+  Function: ; Sets slave select to low (enabled) on the LCD
+  Inputs: none
+  Outputs: none
+  Subroutines used: none
+ */
+ void set_SS_Lo();
 
-int checkButtonPress(int buttonNumber);
+ void SPI_send(char byteToSend);
 
-void calibrateClock();
+ int checkButtonPress(int buttonNumber);
 
-void LCD_write_8(char byteToSend);
+ void calibrateClock();
 
-void LCD_write_4(char byteToSend);
+ void LCD_write_8(char byteToSend);
 
-#endif /* LAB4_HELPER_H_ */
+ void LCD_write_4(char byteToSend);
+
+ #endif /* LAB4_HELPER_H_ */

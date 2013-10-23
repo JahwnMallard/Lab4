@@ -6,5 +6,7 @@
 int main(void) {
 	WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
 
+	initSPI();
+
 	return 0;
 }

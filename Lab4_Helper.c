@@ -4,9 +4,35 @@
  *  Created on: Oct 22, 2013
  *      Author: Administrator
  */
-
+#include <msp430.h>;
 #include "Lab4_helper.h";
 #define RS_MASK 0x40
+char LCDCON;
+void initSPI()
+
+{
+
+	UCB0CTL1 |= UCSWRST;
+
+	UCB0CTL0 |= UCCKPL | UCMSB | UCMST | UCSYNC;
+
+	UCB0CTL1 |= UCSSEL1; //Selects which clock to use
+	UCB0STAT |= UCLISTEN; //enables internal loopback
+
+	P1DIR |= BIT4; //P1.4 is used as the slave select
+
+	P1SEL |= BIT6; //make UCB0SSOMI available on P1.6
+	P1SEL2 |= BIT6;
+
+	P1SEL |= BIT5; //make UCB0CLK available on P1.5
+	P1SEL2 |= BIT5;
+
+	P1SEL |= BIT7; //make UCB0SSIMO available on P1.7
+	P1SEL2 |= BIT7;
+
+	UCB0CTL1 |= UCSWRST; //enable subsystem
+
+}
 
 void LCDinit() {
 	writeCommandNibble(0x03);
@@ -66,6 +92,15 @@ void LCD_write_8(char byteToSend) {
 
 	LCD_write_4(sendByte);
 }
+
+void set_SS_hi() {
+	P1OUT |= BIT4;  //Disables slave select
+}
+
+void set_SS_lo() {
+	P1OUT &= ~BIT4;  //Enables slave select
+}
+
 
 void SPI_send(char byteToSend) {
 	char readByte;
