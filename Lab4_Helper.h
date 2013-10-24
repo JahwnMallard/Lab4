@@ -71,4 +71,8 @@
 
  void LCD_write_4(char byteToSend);
 
+ void delayMicro();
+
+ void delayMilli();
+
  #endif /* LAB4_HELPER_H_ */

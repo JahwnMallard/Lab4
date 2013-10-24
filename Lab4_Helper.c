@@ -101,7 +101,6 @@ void set_SS_lo() {
 	P1OUT &= ~BIT4;  //Enables slave select
 }
 
-
 void SPI_send(char byteToSend) {
 	char readByte;
 
@@ -117,4 +116,10 @@ void SPI_send(char byteToSend) {
 
 	set_SS_hi();
 }
+void delayMicro() {
+	__delay_cycles(1);
+}
 
+void delayMilli() {
+	__delay_cycles(1);
+}
