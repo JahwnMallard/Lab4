@@ -8,6 +8,7 @@
 #include "Lab4_helper.h";
 #define RS_MASK 0x40
 char LCDCON;
+
 void initSPI()
 
 {
@@ -116,6 +117,8 @@ void SPI_send(char byteToSend) {
 
 	set_SS_hi();
 }
+
+//for this commit, note that I do not have my lab notebook by my side, so I need to double check how many clock cycles I actually need to delay.
 void delayMicro() {
 	__delay_cycles(1);
 }
