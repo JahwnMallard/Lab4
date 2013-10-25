@@ -54,12 +54,20 @@ void writeChar(char asciiChar);
  Function Name: writeString
  Author: C2C John Miller, USAF
  Function: Writes a string of characters
- Inputs: string
+ Inputs: string, length
  Outputs: none
  Subroutines used: writeChar
  ---------------------------------------------------*/
-void writeString(char * string);
+void writeString(char * string, int length);
 
+/*---------------------------------------------------
+ Function Name: scrollString
+ Author: C2C John Miller, USAF
+ Function: Scrolls a message across the top of the lcd screen.
+ Inputs: string1, string2, message1Length
+ Outputs: none
+ Subroutines used: writeString
+ ---------------------------------------------------*/
 void scrollString(char * string1, char * string2, int message1Length);
 
 /*---------------------------------------------------

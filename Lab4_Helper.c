@@ -1,5 +1,4 @@
 /*
- /*
  * Author: C2C John Miller
  * Lab4 - Implementation of LCD Driver functions
  *
@@ -9,7 +8,7 @@
 #include <msp430.h>;
 #include "Lab4_helper.h";
 #define RS_MASK 0x40
-
+#define LCD_WIDTH 8
 char LCDCON;
 
 void writeDataByte(char dataByte);
@@ -90,13 +89,13 @@ void writeDataByte(char dataByte) {
 }
 
 void writeChar(char asciiChar) {
-	writeCommandByte(0x06);
+	writeCommandByte(0x06); //cursor increment
 	writeDataByte(asciiChar);
 }
 
-void writeString(char * string) {
+void writeString(char * string, int length) {
 	int i;
-	for (i = 0; i < 8; i++) {
+	for (i = 0; i < length; i++) {
 		writeChar(string[i]);
 	}
 }
@@ -105,14 +104,16 @@ void scrollString(char * string1, char * string2, int message1Length) {
 	int i;
 	int j;
 	for (i = 0; i < message1Length; i++) {
-		for (j = 0; j < 8; j++) {
-			if ((i + j) < message1Length) {
-				writeString(string1+i+j);
+		for (j = 0; j < LCD_WIDTH; j++) {
+			if ((i + j + LCD_WIDTH) < message1Length) {
+				writeString(string1 + i + j, LCD_WIDTH);
 			} else {
-				writeString(string1+j);
+				writeString(string1 + i + j, //concatenates the end of the message with the beginning of it
+				LCD_WIDTH - 1 - (i + j + LCD_WIDTH - message1Length));
+				writeString(string1 + j, (i + j + LCD_WIDTH - message1Length));
 			}
 		}
-		cursorToLineOne();
+		cursorToLineOne(); //resets the cursor
 	}
 }
 void LCD_write_8(char byteToSend) {
