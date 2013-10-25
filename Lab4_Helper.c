@@ -1,5 +1,7 @@
 /*
- * Lab4_Helper.c
+ /*
+ * Author: C2C John Miller
+ * Lab4 - Implementation of LCD Driver functions
  *
  *  Created on: Oct 22, 2013
  *      Author: Administrator
@@ -9,12 +11,16 @@
 #define RS_MASK 0x40
 char LCDCON;
 
+void writeDataByte(char dataByte);
+
+void writeCommandNibble(char commandNibble);
+
+void writeCommandByte(char commandByte);
+
 void initSPI()
 
 {
-
 	UCB0CTL1 |= UCSWRST;
-
 	UCB0CTL0 |= UCCKPL | UCMSB | UCMST | UCSYNC;
 
 	UCB0CTL1 |= UCSSEL1; //Selects which clock to use
@@ -31,8 +37,12 @@ void initSPI()
 	P1SEL |= BIT7; //make UCB0SSIMO available on P1.7
 	P1SEL2 |= BIT7;
 
-	UCB0CTL1 |= UCSWRST; //enable subsystem
+	UCB0CTL1 &= ~UCSWRST; //enable subsystem
 
+}
+
+void LCDclear() {
+	writeCommandByte(1);
 }
 
 void LCDinit() {
@@ -94,6 +104,31 @@ void LCD_write_8(char byteToSend) {
 	LCD_write_4(sendByte);
 }
 
+void LCD_write_4(unsigned char sendByte) {
+	sendByte &= 0x0F;
+
+	sendByte |= LCDCON;
+
+	sendByte &= 0x7F;
+
+	SPI_send(sendByte);
+
+	delayMicro();
+
+	sendByte |= 0x80;
+
+	SPI_send(sendByte);
+
+	delayMicro();
+
+	sendByte &= 0x7F;
+
+	SPI_send(sendByte);
+
+	delayMicro();
+
+}
+
 void set_SS_hi() {
 	P1OUT |= BIT4;  //Disables slave select
 }
@@ -118,11 +153,10 @@ void SPI_send(char byteToSend) {
 	set_SS_hi();
 }
 
-//for this commit, note that I do not have my lab notebook by my side, so I need to double check how many clock cycles I actually need to delay.
 void delayMicro() {
-	__delay_cycles(1);
+	__delay_cycles(43);
 }
 
 void delayMilli() {
-	__delay_cycles(1);
+	__delay_cycles(1743);
 }

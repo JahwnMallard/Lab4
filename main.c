@@ -5,10 +5,12 @@
  */
 int main(void) {
 	WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
-
 	initSPI();
+	LCDinit();
 	LCDclear();
-	SPIsend();
+
+	while (1) {
+	}
 
 	return 0;
 }

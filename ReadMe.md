@@ -49,11 +49,6 @@ void writeString(char * string);
 
 void scrollString(char * string1, char * string2);
 
-void writeDataByte(char dataByte);
-
-void writeCommandNibble(char commandNibble);
-
-void writeCommandByte(char commandByte);
 
 /*---------------------------------------------------
  Function Name: SET_SS_HI
@@ -76,7 +71,7 @@ void set_SS_Hi();
 void set_SS_Lo();
 
 /*---------------------------------------------------
- Subroutine Name: SPISEND
+ Subroutine Name: SPI_send
  Author: Capt Todd Branchflower, USAF
  Function: Send a byte to the SPI for either commands or data
  Outputs: none
@@ -89,34 +84,42 @@ int checkButtonPress(int buttonNumber);
 void calibrateClock();
 
 /*---------------------------------------------------
- Subroutine Name: LCDWRT8
+ Subroutine Name: LCD_write_8
  Author: Capt Todd Branchflower, USAF
  Function: Send full byte to LCD
  Inputs: byteToSend
  Outputs: none
  Subroutines used: LCD_write_4
----------------------------------------------------*/
+ ---------------------------------------------------*/
 void LCD_write_8(char byteToSend);
 
-
-void LCD_write_4(char byteToSend);
+/*---------------------------------------------------
+ Subroutine Name: LCD_write_4
+ Author: C2C John Miller, USAF
+ Function: Send 4 bits of data to LCD via SPI.
+ sets upper four bits to match LCDCON.
+ Inputs: byteToSend
+ Outputs: none
+ Subroutines used: LCD_write_4
+ ---------------------------------------------------*/
+void LCD_write_4(unsigned char byteToSend);
 
 /*---------------------------------------------------
  Function Name: delayMicro
  Author: C2C John Miller, USAF
- Function: Delays the MSP430 by a microsecond
+ Function: Delays the MSP430 by 40.5 microseconds
  Inputs: none
  Outputs: none
  Subroutines used: __delay_cycles()
----------------------------------------------------*/
+ ---------------------------------------------------*/
 void delayMicro();
 
 /*---------------------------------------------------
  Function Name: delayMilli
  Author: C2C John Miller, USAF
- Function: Delays the MSP430 by a millisecond
+ Function: Delays the MSP430 by 1.65 milliseconds
  Inputs: none
  Outputs: none
  Subroutines used: __delay_cycles()
----------------------------------------------------*/
+ ---------------------------------------------------*/
 void delayMilli();
