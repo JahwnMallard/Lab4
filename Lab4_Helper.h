@@ -85,7 +85,7 @@ void writeString(char * string, int length);
  Outputs: none
  Subroutines used: writeString
  ---------------------------------------------------*/
-void scrollString(char * string1, char * string2, int message1Length);
+void scrollString(char * string1, char * string2, int message1Length, int message2Length);
 
 /*---------------------------------------------------
  Function Name: SET_SS_HI

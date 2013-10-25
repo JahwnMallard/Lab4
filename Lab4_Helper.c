@@ -7,6 +7,7 @@
  */
 #include <msp430.h>;
 #include "Lab4_helper.h";
+#include "button.h";
 #define RS_MASK 0x40
 #define LCD_WIDTH 8
 char LCDCON;
@@ -16,6 +17,10 @@ void writeDataByte(char dataByte);
 void writeCommandNibble(char commandNibble);
 
 void writeCommandByte(char commandByte);
+
+void initButtons() {
+	configureP1PinAsButton(BIT0 | BIT1 | BIT2);
+}
 
 void initSPI()
 
@@ -98,23 +103,40 @@ void writeString(char * string, int length) {
 	for (i = 0; i < length; i++) {
 		writeChar(string[i]);
 	}
+
 }
 
-void scrollString(char * string1, char * string2, int message1Length) {
-	int i;
-	int j;
-	for (i = 0; i < message1Length; i++) {
-		for (j = 0; j < LCD_WIDTH; j++) {
-			if ((i + j + LCD_WIDTH) < message1Length) {
-				writeString(string1 + i + j, LCD_WIDTH);
-			} else {
-				writeString(string1 + i + j, //concatenates the end of the message with the beginning of it
-				LCD_WIDTH - 1 - (i + j + LCD_WIDTH - message1Length));
-				writeString(string1 + j, (i + j + LCD_WIDTH - message1Length));
-			}
+void scrollString(char * string1, char * string2, int message1Length,
+		int message2Length) {
+	int i = 0;
+
+
+	while (1) {
+
+		if (i % message1Length + 8 <= message1Length) {
+			writeString((string1 + i % message1Length), LCD_WIDTH);
+
+		} else {
+			writeString(string1 + i % message1Length,
+					message1Length - i % message1Length);
+			writeString(string1, i % message1Length);
 		}
-		cursorToLineOne(); //resets the cursor
+		cursorToLineTwo();
+		_delay_cycles(100000);
+
+		if (i % message2Length + 8 <= message2Length) {
+			writeString((string2 + i % message2Length), LCD_WIDTH);
+
+		} else {
+			writeString(string2 + i % message2Length,
+					message2Length - i % message2Length);
+			writeString(string2, i % message2Length);
+		}
+		cursorToLineOne();
+		//resets the cursor
+		i++;
 	}
+
 }
 void LCD_write_8(char byteToSend) {
 	unsigned char sendByte = byteToSend;
