@@ -43,12 +43,19 @@ void cursorToLineTwo();
 
 void cursorToLineOne();
 
+/*---------------------------------------------------
+ Function Name: writeChar
+ Author: C2C John Miller, USAF
+ Function: Writes a single character
+ Inputs: asciiChar
+ Outputs: none
+ Subroutines used: writeCommandByte, writeDataByte
+ ---------------------------------------------------*/
 void writeChar(char asciiChar);
 
 void writeString(char * string);
 
 void scrollString(char * string1, char * string2);
-
 
 /*---------------------------------------------------
  Function Name: SET_SS_HI

@@ -88,6 +88,11 @@ void writeDataByte(char dataByte) {
 	delayMilli();
 }
 
+void writeChar(char asciiChar){
+	writeCommandByte(0x06);
+	writeDataByte(asciiChar);
+}
+
 void LCD_write_8(char byteToSend) {
 	unsigned char sendByte = byteToSend;
 

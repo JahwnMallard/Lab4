@@ -40,6 +40,14 @@ void cursorToLineTwo();
 
 void cursorToLineOne();
 
+/*---------------------------------------------------
+ Function Name: writeChar
+ Author: C2C John Miller, USAF
+ Function: Writes a single character
+ Inputs: asciiChar
+ Outputs: none
+ Subroutines used: writeCommandByte, writeDataByte
+ ---------------------------------------------------*/
 void writeChar(char asciiChar);
 
 void writeString(char * string);

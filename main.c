@@ -8,7 +8,8 @@ int main(void) {
 	initSPI();
 	LCDinit();
 	LCDclear();
-
+	writeChar(0x73);
+	writeChar(0x41);
 	while (1) {
 	}
 
