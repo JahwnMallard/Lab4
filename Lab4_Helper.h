@@ -60,7 +60,7 @@ void writeChar(char asciiChar);
  ---------------------------------------------------*/
 void writeString(char * string);
 
-void scrollString(char * string1, char * string2);
+void scrollString(char * string1, char * string2, int message1Length);
 
 /*---------------------------------------------------
  Function Name: SET_SS_HI

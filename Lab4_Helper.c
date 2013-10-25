@@ -89,18 +89,32 @@ void writeDataByte(char dataByte) {
 	delayMilli();
 }
 
-void writeChar(char asciiChar){
+void writeChar(char asciiChar) {
 	writeCommandByte(0x06);
 	writeDataByte(asciiChar);
 }
 
-void writeString(char * string){
+void writeString(char * string) {
 	int i;
-	for(i = 0; i<9; i++){
+	for (i = 0; i < 8; i++) {
 		writeChar(string[i]);
 	}
 }
 
+void scrollString(char * string1, char * string2, int message1Length) {
+	int i;
+	int j;
+	for (i = 0; i < message1Length; i++) {
+		for (j = 0; j < 8; j++) {
+			if ((i + j) < message1Length) {
+				writeString(string1+i+j);
+			} else {
+				writeString(string1+j);
+			}
+		}
+		cursorToLineOne();
+	}
+}
 void LCD_write_8(char byteToSend) {
 	unsigned char sendByte = byteToSend;
 
@@ -172,4 +186,8 @@ void delayMicro() {
 
 void delayMilli() {
 	__delay_cycles(1743);
+}
+
+void cursorToLineOne() {
+	writeCommandByte(0x01);
 }
