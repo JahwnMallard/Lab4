@@ -5,6 +5,7 @@
 
 #ifndef LAB4_HELPER_H_
 #define LAB4_HELPER_H_
+#define LCD_WIDTH 8
 
 /*---------------------------------------------------
  Function Name: INITSPI

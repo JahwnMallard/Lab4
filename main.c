@@ -11,19 +11,25 @@ int main(void) {
 			'l', 'a', 's', 's', '!', ' ' };
 	int mainMessageLength = 30;
 	char * mainMessagePointer = &mainMESSAGE[0];
+
+
+	char initialMessageTop[] = { 'M', 'e', 's', 's', ' a', 'g', 'e','?' };
+	char * initialMessageTopPointer = &initialMessageTop[0];
+
+	char initialMessageBottom[] = { 'P', 'r', 'e', 's', 's', '1', '2', ' 3' };
+	char * initialMessageBottomPointer = &initialMessageBottom[0];
+
+
 	initSPI();
 	LCDinit();
 	LCDclear();
+
+	writeString(initialMessageTopPointer, LCD_WIDTH);
+	cursorToLineTwo();
+	writeString(initialMessageBottomPointer, LCD_WIDTH);
 //	while (1) {
 //		scrollString(mainMessagePointer, mainMessagePointer, mainMessageLength);
 //	}
-	char test[] = { 't', 'e', 's', 't' };
-	char test2[] = { 'y', 'e', 'a', 'h' };
-	char *test1Pointer = &test[0];
-	char *test2Pointer = &test2[0];
-	writeString(test1Pointer, 4);
-	cursorToLineTwo();
-	writeString(test2Pointer, 4);
 
 	return 0;
 }
