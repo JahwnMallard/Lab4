@@ -9,6 +9,7 @@ and the decrypted message on the bottom.
 functions used: (descriptions will be added as the functions are created)
 
 
+
 /*---------------------------------------------------
  Function Name: INITSPI
  Author: C2C John Miller, USAF
@@ -53,6 +54,14 @@ void cursorToLineOne();
  ---------------------------------------------------*/
 void writeChar(char asciiChar);
 
+/*---------------------------------------------------
+ Function Name: writeString
+ Author: C2C John Miller, USAF
+ Function: Writes a string of characters
+ Inputs: string
+ Outputs: none
+ Subroutines used: writeChar
+ ---------------------------------------------------*/
 void writeString(char * string);
 
 void scrollString(char * string1, char * string2);

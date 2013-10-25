@@ -3,13 +3,17 @@
 /*
  * main.c
  */
+
 int main(void) {
 	WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
+	char MESSAGE[]={'T', 'E', 'S', 'T', ' ', ' ', ' ', ' '};
+	char * messagePointer = &MESSAGE[0];
 	initSPI();
 	LCDinit();
 	LCDclear();
-	writeChar(0x73);
-	writeChar(0x41);
+	writeString( messagePointer);
+
+
 	while (1) {
 	}
 

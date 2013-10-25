@@ -9,6 +9,7 @@
 #include <msp430.h>;
 #include "Lab4_helper.h";
 #define RS_MASK 0x40
+
 char LCDCON;
 
 void writeDataByte(char dataByte);
@@ -91,6 +92,13 @@ void writeDataByte(char dataByte) {
 void writeChar(char asciiChar){
 	writeCommandByte(0x06);
 	writeDataByte(asciiChar);
+}
+
+void writeString(char * string){
+	int i;
+	for(i = 0; i<9; i++){
+		writeChar(string[i]);
+	}
 }
 
 void LCD_write_8(char byteToSend) {
