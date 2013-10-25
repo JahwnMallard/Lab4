@@ -22,6 +22,13 @@ void initButtons() {
 	configureP1PinAsButton(BIT0 | BIT1 | BIT2);
 }
 
+void initProgram() {
+	initSPI();
+	LCDinit();
+	LCDclear();
+	initButtons();
+}
+
 void initSPI()
 
 {
@@ -106,10 +113,37 @@ void writeString(char * string, int length) {
 
 }
 
+void calibrateClock(char frequency) {
+	DCOCTL = 0; // Select lowest DCOxand MODx settings
+	switch (frequency) {
+
+	case 1:
+		BCSCTL1 = CALBC1_1MHZ;
+		DCOCTL = CALDCO_1MHZ;
+		break;
+
+	case 8:
+		BCSCTL1 = CALBC1_8MHZ;
+		DCOCTL = CALDCO_8MHZ;
+		break;
+
+	case 12:
+		BCSCTL1 = CALBC1_12MHZ;
+		DCOCTL = CALDCO_12MHZ;
+		break;
+
+	case 16:
+		BCSCTL1 = CALBC1_16MHZ;
+		DCOCTL = CALDCO_16MHZ;
+		break;
+
+	}
+
+}
+
 void scrollString(char * string1, char * string2, int message1Length,
 		int message2Length) {
 	int i = 0;
-
 
 	while (1) {
 

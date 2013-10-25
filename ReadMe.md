@@ -11,6 +11,17 @@ functions used: (descriptions will be added as the functions are created)
 
 
 /*---------------------------------------------------
+ Function Name: initButtons
+ Author: C2C John Miller, USAF
+ Function: Initializes bits 0, 1, and 2 as inputs for buttons
+ Inputs: none
+ Outputs: none
+ Subroutines used: configureP1PinAsButton
+ ---------------------------------------------------*/
+
+void initButtons();
+
+/*---------------------------------------------------
  Function Name: INITSPI
  Author: C2C John Miller, USAF
  Function: Initializes the SPI of the MSP430
@@ -30,6 +41,16 @@ void initSPI();
  ---------------------------------------------------*/
 void LCDinit();
 
+/*---------------------------------------------------
+ Function Name: initProgram
+ Author: C2C John Miller, USAF
+ Function: Initializes the program
+ Inputs: none
+ Outputs: none
+ Subroutines used: LCDinit, initSPI, LCDclear, initButtons
+ ---------------------------------------------------*/
+
+void initProgram();
 /*---------------------------------------------------
  Function Name: LCDclear
  Author: Capt Todd Branchflower, USAF
@@ -88,7 +109,8 @@ void writeString(char * string, int length);
  Outputs: none
  Subroutines used: writeString
  ---------------------------------------------------*/
-void scrollString(char * string1, char * string2, int message1Length);
+void scrollString(char * string1, char * string2, int message1Length,
+		int message2Length);
 
 /*---------------------------------------------------
  Function Name: SET_SS_HI
@@ -119,9 +141,15 @@ void set_SS_Lo();
  ---------------------------------------------------*/
 void SPI_send(char byteToSend);
 
-int checkButtonPress(int buttonNumber);
-
-void calibrateClock();
+/*---------------------------------------------------
+ Subroutine Name: calibrateClock
+ Author: C2C John Miller, USAF
+ Function: calibrates clock of the MSP430 to 1, 8 12  or 16 MHz
+ Inputs:frequency (must be 1, 8, 12, or 16)
+ Outputs: none
+ Subroutines used: none
+ ---------------------------------------------------*/
+void calibrateClock(char frequency);
 
 /*---------------------------------------------------
  Subroutine Name: LCD_write_8
@@ -162,4 +190,4 @@ void delayMicro();
  Outputs: none
  Subroutines used: __delay_cycles()
  ---------------------------------------------------*/
- void delayMilli();
+void delayMilli();

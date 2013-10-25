@@ -8,32 +8,33 @@
 int main(void) {
 	WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
 
-	char * mainMessagePointer = "ECE382 is my favorite class! ";
-	char * initialMessageTopPointer = "Message?";
-	char * initialMessageBottomPointer = "Press123";
+	char * mainMessage = "ECE382 is my favorite class! ";
+	char * initialMessageTop = "Message?";
+	char * initialMessageBottom = "Press123";
+
 	char * message1 = "Documentation: Some ";
 	char * message2 = "ASCII isn't sufficient for this message ";
 	char * message3 = "I put the sin in 'syntax error' ";
+
 	int mainMessageLength = 29;
 	int message1Length = 20;
 	int message2Length = 40;
 	int message3Length = 32;
+
 	char * selection;
 	int selectionLength;
 
-	initSPI();
-	LCDinit();
-	LCDclear();
-	initButtons();
+	calibrateClock(1);
+	initProgram();
 	char buttons[] = { BIT0, BIT1, BIT2 };
 
-	writeString(initialMessageTopPointer, LCD_WIDTH);
+	writeString(initialMessageTop, LCD_WIDTH);
 	cursorToLineTwo();
-	writeString(initialMessageBottomPointer, LCD_WIDTH);
+	writeString(initialMessageBottom, LCD_WIDTH);
 
 	char option = pollP1Buttons(buttons, 3);
 
-	LCDclear();
+
 
 	switch (option) {
 	case BIT0:
@@ -53,7 +54,7 @@ int main(void) {
 	}
 
 	while (1) {
-		scrollString(mainMessagePointer, selection, mainMessageLength,
+		scrollString(mainMessage, selection, mainMessageLength,
 				selectionLength);
 	}
 	return 0;
