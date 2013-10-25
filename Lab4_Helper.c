@@ -190,5 +190,14 @@ void delayMilli() {
 }
 
 void cursorToLineOne() {
-	writeCommandByte(0x01);
+	writeCommandByte(0x02);
 }
+
+void cursorToLineTwo() {
+	cursorToLineOne();
+	int i;
+	for (i = 0; i < 40; i++) {
+		writeCommandByte(0x14);
+	}
+}
+

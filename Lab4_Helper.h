@@ -36,8 +36,24 @@ void LCDinit();
  ---------------------------------------------------*/
 void LCDclear();
 
+/*---------------------------------------------------
+ Function Name: cursorToLineTwo
+ Author: C2C John Miller, USAF
+ Function: set the cursor to the beginning of the bottom half of the LCD
+ Inputs: none
+ Outputs: none
+ Subroutines used: cursorToLineOne, writeCommandByte
+ ---------------------------------------------------*/
 void cursorToLineTwo();
 
+/*---------------------------------------------------
+ Function Name: cursorToLineTwo
+ Author: C2C John Miller, USAF
+ Function: set the cursor to the beginning of the top half of the LCD
+ Inputs: none
+ Outputs: none
+ Subroutines used: writeCommandByte
+ ---------------------------------------------------*/
 void cursorToLineOne();
 
 /*---------------------------------------------------
